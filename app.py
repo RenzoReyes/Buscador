@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, send_file
+from flask import Flask, request, jsonify, render_template, send_file, abort
 from facade import BuscadorFacade  # Asegúrate de que facade.py está en el mismo directorio
 import os
 
@@ -9,6 +9,7 @@ RUTA_DOCUMENTOS = r"C:\Users\56974\Desktop\seminario 2024\codigo python github\d
 PROCESAR_CONSULTA_SCRIPT = 'procesar_consulta.py'
 RANKING_SCRIPT = 'ranking.py'
 
+# Definir la instancia de la fachada
 facade = BuscadorFacade(PROCESAR_CONSULTA_SCRIPT, RANKING_SCRIPT, RUTA_DOCUMENTOS)
 
 @app.route('/')
@@ -33,9 +34,8 @@ def buscar():
 def ver_documento(doc_id):
     ruta_archivo = os.path.join(RUTA_DOCUMENTOS, f"{doc_id}.pdf")
     if os.path.exists(ruta_archivo):
-        with open(ruta_archivo, 'r', encoding='utf-8') as file:
-            contenido = file.read()
-        return render_template('ver_documento.html', doc_id=doc_id, contenido=contenido)
+        # Cambiamos para enviar el archivo como un archivo para que el navegador lo muestre o lo descargue
+        return send_file(ruta_archivo, as_attachment=False)
     else:
         return render_template('error.html', error_message='Documento no encontrado.')
 
@@ -49,4 +49,3 @@ def descargar_documento(doc_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
-

@@ -38,6 +38,8 @@ class BuscadorFacade:
                 text=True,
                 check=True
             )
+            print(f"Consulta result: {consulta_resultado.stdout}")  # Depuración
+
             terminos_clave = json.loads(consulta_resultado.stdout)
             
             # Crear un archivo temporal con los términos clave
@@ -52,6 +54,7 @@ class BuscadorFacade:
                 check=True
             )
             
+            print(f"Ranking result: {ranking_resultado.stdout}")  # Depuración
             resultados = json.loads(ranking_resultado.stdout)
             return resultados
         

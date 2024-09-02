@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscador de Documentos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#buscar').click(function(){
+                var query = $('#query').val();
+                if (!query) {
+                    alert("Por favor, ingrese una consulta.");
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/buscar",
+                    data: {query: query},
+                    success: function(response){
+                        console.log("Respuesta recibida:", response);  // Depuración
+                        $('#resultados').empty();
+                        response.forEach(function(resultado){
+                            var similitud = resultado.similitud;
+                            $('#resultados').append('<tr><td>' + resultado._id + '</td><td>' + similitud + '</td></tr>');
+                        });
+                    },
+                    error: function(error){
+                        alert('Error: ' + error.responseJSON.error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Buscador de Documentos</h1>
+    <label for="query">Consulta:</label>
+    <input type="text" id="query" name="query" size="50">
+    <button id="buscar">Buscar</button>
+    <table id="resultados">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Similitud</th>  <!-- Cambio aquí -->
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+</html>

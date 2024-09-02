@@ -7,10 +7,10 @@ import os
 from transformers import BertTokenizer, BertModel
 
 # Ruta de los archivos de documentos
-RUTA_DOCUMENTOS = r'C:\Users\56974\Desktop\seminario 2024\codigo python\decretos_2023_test'
+RUTA_DOCUMENTOS = r'C:\Users\56974\Desktop\seminario 2024\codigo python github\decretos_2023_test'
 
 # Ruta del archivo de embeddings precalculados
-RUTA_EMBEDDINGS = r'C:\Users\56974\Desktop\seminario 2024\codigo python\embeddings.npy'
+RUTA_EMBEDDINGS = r'C:\Users\56974\Desktop\seminario 2024\codigo python github\embeddings.npy'
 
 if len(sys.argv) < 2:
     print("Error: No se proporcionaron la consulta o la ruta de documentos.")

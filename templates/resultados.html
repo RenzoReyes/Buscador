@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados de Búsqueda</title>
+</head>
+<body>
+    <h1>Resultados de Búsqueda</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Similitud</th>  <!-- Cambio aquí -->
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resultado in resultados %}
+            <tr>
+                <td>{{ resultado['_id'] }}</td>
+                <td>{{ resultado['similitud'] }}</td>  <!-- Cambio aquí -->
+                <td>
+                    <a href="/ver/{{ resultado['_id'] }}">Ver</a>
+                    <a href="/descargar/{{ resultado['_id'] }}">Descargar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/">Nueva Búsqueda</a>
+</body>
+</html>
